@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Form, Button, Alert, Spinner } from 'react-bootstrap';
 import { crearEncomienda } from '../services/encomiendaService';
 
 function FormEncomienda({ onSuccess }) {
@@ -12,6 +13,7 @@ function FormEncomienda({ onSuccess }) {
   const [mensaje, setMensaje] = useState('');
   const [error, setError] = useState('');
   const [erroresCampo, setErroresCampo] = useState({});
+  const [loading, setLoading] = useState(false);
 
   function validarCampos() {
     const nuevosErrores = {};
@@ -52,6 +54,7 @@ function FormEncomienda({ onSuccess }) {
       return;
     }
 
+    setLoading(true);
     try {
       await crearEncomienda(form);
       setMensaje('¡Encomienda enviada con éxito!');
@@ -67,64 +70,90 @@ function FormEncomienda({ onSuccess }) {
     } catch (err) {
       setError('Ocurrió un error al guardar la encomienda. Intenta después.');
     }
+    setLoading(false);
   }
 
   return (
-    <form onSubmit={handleSubmit} noValidate>
-      <label>
-        Remitente:
-        <input
+    <Form onSubmit={handleSubmit} noValidate>
+      <Form.Group className="mb-3" controlId="remitente">
+        <Form.Label>Remitente</Form.Label>
+        <Form.Control
           name="remitente"
           value={form.remitente}
           onChange={handleChange}
-          required
+          isInvalid={!!erroresCampo.remitente}
+          disabled={loading}
         />
-        {erroresCampo.remitente && <span style={{ color: 'red' }}>{erroresCampo.remitente}</span>}
-      </label><br />
-      <label>
-        Destinatario:
-        <input
+        <Form.Control.Feedback type="invalid">
+          {erroresCampo.remitente}
+        </Form.Control.Feedback>
+      </Form.Group>
+      <Form.Group className="mb-3" controlId="destinatario">
+        <Form.Label>Destinatario</Form.Label>
+        <Form.Control
           name="destinatario"
           value={form.destinatario}
           onChange={handleChange}
-          required
+          isInvalid={!!erroresCampo.destinatario}
+          disabled={loading}
         />
-        {erroresCampo.destinatario && <span style={{ color: 'red' }}>{erroresCampo.destinatario}</span>}
-      </label><br />
-      <label>
-        Dirección:
-        <input
+        <Form.Control.Feedback type="invalid">
+          {erroresCampo.destinatario}
+        </Form.Control.Feedback>
+      </Form.Group>
+      <Form.Group className="mb-3" controlId="direccion">
+        <Form.Label>Dirección</Form.Label>
+        <Form.Control
           name="direccion"
           value={form.direccion}
           onChange={handleChange}
-          required
+          isInvalid={!!erroresCampo.direccion}
+          disabled={loading}
         />
-        {erroresCampo.direccion && <span style={{ color: 'red' }}>{erroresCampo.direccion}</span>}
-      </label><br />
-      <label>
-        Código seguimiento:
-        <input
+        <Form.Control.Feedback type="invalid">
+          {erroresCampo.direccion}
+        </Form.Control.Feedback>
+      </Form.Group>
+      <Form.Group className="mb-3" controlId="codigoSeguimiento">
+        <Form.Label>Código de Seguimiento</Form.Label>
+        <Form.Control
           name="codigoSeguimiento"
           value={form.codigoSeguimiento}
           onChange={handleChange}
-          required
+          isInvalid={!!erroresCampo.codigoSeguimiento}
+          disabled={loading}
         />
-        {erroresCampo.codigoSeguimiento && <span style={{ color: 'red' }}>{erroresCampo.codigoSeguimiento}</span>}
-      </label><br />
-      <label>
-        Estado:
-        <input
+        <Form.Control.Feedback type="invalid">
+          {erroresCampo.codigoSeguimiento}
+        </Form.Control.Feedback>
+      </Form.Group>
+      <Form.Group className="mb-3" controlId="estado">
+        <Form.Label>Estado</Form.Label>
+        <Form.Control
           name="estado"
           value={form.estado}
           onChange={handleChange}
-          required
+          isInvalid={!!erroresCampo.estado}
+          disabled={loading}
         />
-        {erroresCampo.estado && <span style={{ color: 'red' }}>{erroresCampo.estado}</span>}
-      </label><br />
-      <button type="submit">Enviar encomienda</button>
-      {mensaje && <p style={{ color: 'green', fontWeight: 'bold' }}>{mensaje}</p>}
-      {error && <p style={{ color: 'red' }}>{error}</p>}
-    </form>
+        <Form.Control.Feedback type="invalid">
+          {erroresCampo.estado}
+        </Form.Control.Feedback>
+      </Form.Group>
+      <div className="d-grid mb-3">
+        <Button variant="primary" type="submit" disabled={loading}>
+          {loading ? (
+            <>
+              <Spinner animation="border" size="sm" /> Enviando...
+            </>
+          ) : (
+            'Enviar encomienda'
+          )}
+        </Button>
+      </div>
+      {mensaje && <Alert variant="success">{mensaje}</Alert>}
+      {error && <Alert variant="danger">{error}</Alert>}
+    </Form>
   );
 }
 

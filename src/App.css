@@ -1,38 +1,65 @@
-.App {
-  text-align: center;
+/* App.css */
+body {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background: #eef5fc;
+  margin: 0;
+  padding: 0;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.app-container {
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 2rem;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px #c9deee60;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+form label {
+  display: block;
+  margin-bottom: 0.25rem;
+  font-weight: 600;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+form input {
+  display: block;
+  width: 95%;
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+  padding: 0.4rem;
+  border: 1px solid #9bbfea;
+  border-radius: 4px;
+  transition: border 0.2s;
 }
 
-.App-link {
-  color: #61dafb;
+form input:focus {
+  outline: none;
+  border-color: #3573c4;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+form input.error {
+  border-color: #e22b2b;
+  background: #ffeded;
+}
+
+form button[type="submit"] {
+  padding: 0.6rem 1.5rem;
+  font-size: 1.05rem;
+  font-weight: bold;
+  color: #fff;
+  background: #317eee;
+  border: none;
+  border-radius: 6px;
+  margin-top: 0.8rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+form button[type="submit"]:hover {
+  background: #245b9e;
+}
+
+span[style*="color: red"] {
+  display: block;
+  margin-bottom: 0.5rem;
 }
