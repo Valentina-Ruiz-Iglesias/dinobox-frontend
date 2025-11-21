@@ -98,7 +98,7 @@ function ActualizarEstadoEncomiendaPage() {
                   <option value="En Ruta">En Ruta</option>
                   <option value="Entregada">Entregada</option>
                   <option value="Devuelta">Devuelta</option>
-                  {/* Agrega más estados según tu sistema */}
+                  
                 </Form.Control>
               </Form.Group>
               <Button className="mt-3" variant="success" type="submit" disabled={loading || nuevoEstado === ''}>
