@@ -5,6 +5,7 @@ import HomePage from './pages/HomePage';
 import EnviarEncomiendaPage from './pages/EnviarEncomiendaPage';
 import ListaEncomiendasPage from './pages/ListaEncomiendasPage';
 import ConsultaEncomiendaPage from './pages/ConsultaEncomiendaPage';
+import ActualizarEstadoEncomiendaPage from "./pages/ActualizarEstadoEncomiendaPage";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
             <Nav.Link as={Link} to="/">Inicio</Nav.Link>
             <Nav.Link as={Link} to="/enviar">Enviar Encomienda</Nav.Link>
             <Nav.Link as={Link} to="/listado">Listar Encomiendas</Nav.Link>
+            <Nav.Link as={Link} to="/actualizar">Actualizar Estado</Nav.Link>
             <Nav.Link as={Link} to="/consulta">Consulta por Código</Nav.Link>
           </Nav>
         </Container>
@@ -25,6 +27,7 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/enviar" element={<EnviarEncomiendaPage />} />
           <Route path="/listado" element={<ListaEncomiendasPage />} />
+          <Route path="/actualizar" element={<ActualizarEstadoEncomiendaPage />} />
           <Route path="/consulta" element={<ConsultaEncomiendaPage />} />
         </Routes>
       </Container>
